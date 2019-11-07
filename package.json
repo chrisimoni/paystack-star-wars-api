@@ -1,0 +1,28 @@
+{
+  "name": "paystack-star-wars-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisimoni/paystack-star-wars-api.git"
+  },
+  "author": "Chris Imoni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisimoni/paystack-star-wars-api/issues"
+  },
+  "homepage": "https://github.com/chrisimoni/paystack-star-wars-api#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
