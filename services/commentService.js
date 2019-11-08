@@ -21,3 +21,16 @@ exports.getCommentCount = async (movie_id) => {
         return err;
     }
 };
+
+/**
+ * Add comment
+ */
+exports.addComment = async (data) => {
+    try {
+        await Comment.create(data);
+
+    }catch (err) {
+        return err;
+    }
+
+};

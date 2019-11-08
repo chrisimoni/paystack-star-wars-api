@@ -11,4 +11,16 @@ exports.getAllMovies = async () => {
     } catch(err) {
         return err;
     }
-}
+};
+
+/**
+ * Find movie by movie Id
+ */
+exports.getMovieById = async (movieId) => {
+    try {
+        const result = await axios.get(`https://swapi.co/api/films/${movieId}`)
+        return result.data;
+    } catch(err) {
+        return err;
+    }
+};

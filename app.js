@@ -1,9 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const movieRoutes = require('./routes/movie');
+const commentRoutes = require('./routes/comment');
 const Comment = require('./models/comment');
 
 const app = express();
+
+// parse application/json
+app.use(bodyParser.json());
 
 /**
 * Cross site origin access
@@ -18,7 +23,9 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/movies/comments', commentRoutes);
 app.use('/movies', movieRoutes);
+
 
 //Port
 const port = process.env.PORT || 3000;

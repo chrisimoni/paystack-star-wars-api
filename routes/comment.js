@@ -1,10 +1,10 @@
 const express = require('express');
 
-const movieController = require('../controllers/movieController');
+const commentController = require('../controllers/commentController');
 
 const router = express.Router();
 
 //Get movie list with opening crawls and comment counts
-router.get('/', movieController.getMovieLists);
+router.post('/', commentController.addComment);
 
 module.exports = router;

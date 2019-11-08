@@ -5,6 +5,7 @@ exports.sortMoviesByReleaseDate =  (movies) => {
         });
     }catch(err) {
         return err;
-    }
-    
+    }  
 };
+
+exports.extractMovieId = (url) => parseInt(url.replace(/[\D]/g, ''));
