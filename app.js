@@ -1,6 +1,7 @@
 const express = require('express');
 
 const movieRoutes = require('./routes/movie');
+const Comment = require('./models/comment');
 
 const app = express();
 
