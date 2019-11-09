@@ -4,7 +4,7 @@ exports.sortMoviesByReleaseDate =  (movies) => {
             return  new Date(b.release_date) - new Date(a.release_date);
         });
     }catch(err) {
-        return err;
+        return Promise.reject(err);
     }  
 };
 

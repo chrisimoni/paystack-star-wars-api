@@ -4,7 +4,7 @@ const movieService = require('../services/movieService');
 
 exports.getMovieLists = async (req, res) => {
     try {
-        let data = await movieService.getAllMovies();
+        let data = await movieService.getAllMovies(req, res);
         let sortedResults = utils.sortMoviesByReleaseDate(data.results);
 
         let movies = [];
@@ -12,7 +12,7 @@ exports.getMovieLists = async (req, res) => {
         for(let movie of sortedResults) {
             //Extract movie id from url
             let movieId = utils.extractMovieId(movie.url);
-            let comments = await commentService.getCommentCount(movieId);
+            let comments = await commentService.getCommentCount(req, res, movieId);
             movies.push({
                 movie_id: movieId,
                 title: movie.title,
@@ -22,11 +22,15 @@ exports.getMovieLists = async (req, res) => {
             });
         }
         res.status(200).json({
+            status: 'Success',
             message: 'All movies retrieved',
             movies: movies
         });
     } catch(err) {
-        res.status(500).json({msg: err});
+        res.status(500).json({
+            status: 'Error',
+            message: err.message
+        });
     }
     
 };

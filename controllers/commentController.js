@@ -16,7 +16,7 @@ exports.addComment = async (req, res) => {
     //Validation error
     if(result.error != null){
         return  res.status(400).json({
-            status: false,
+            status: 'Error',
             message: result.error.details,
         });
     }
@@ -46,7 +46,7 @@ exports.addComment = async (req, res) => {
     const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     const comment = req.body.comment;
 
-    await commentService.addComment({
+    await commentService.addComment(req, res, {
         movie_id: movieId,
         comment: comment,
         public_ip: ip
