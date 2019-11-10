@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 const movieRoutes = require('./routes/movie');
 const commentRoutes = require('./routes/comment');
-const Comment = require('./models/comment');
+const characterRoutes = require('./routes/character');
 
 const app = express();
 
@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/movies/comments', commentRoutes);
+app.use('/movies/characters', characterRoutes);
 app.use('/movies', movieRoutes);
 
 

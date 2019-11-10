@@ -12,7 +12,7 @@ exports.getMovieLists = async (req, res) => {
         for(let movie of sortedResults) {
             //Extract movie id from url
             let movieId = utils.extractMovieId(movie.url);
-            let comments = await commentService.getCommentCount(req, res, movieId);
+            let comments = await commentService.getCommentsAndCount(req, res, movieId);
             movies.push({
                 movie_id: movieId,
                 title: movie.title,

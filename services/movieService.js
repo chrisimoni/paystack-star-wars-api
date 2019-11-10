@@ -5,7 +5,7 @@ const axios = require('axios');
  */
 exports.getAllMovies = async (req, res) => {
     try {
-        const result = await axios.get('https://swapi.co/api/films')
+        const result = await axios.get('https://swapi.co/api/films');
         return result.data;
     } catch(err) {
         res.status(500).json({
@@ -18,11 +18,14 @@ exports.getAllMovies = async (req, res) => {
 /**
  * Find movie by movie Id
  */
-exports.getMovieById = async (movieId) => {
+exports.getMovieById = async (req, res, movieId) => {
     try {
-        const result = await axios.get(`https://swapi.co/api/films/${movieId}`)
+        const result = await axios.get(`https://swapi.co/api/films/${movieId}`);
         return result.data;
     } catch(err) {
-        return err;
+        res.status(500).json({
+            status: 'Error',
+            message: `${err.message}. Cannot find Movie or URL`
+        });
     }
 };

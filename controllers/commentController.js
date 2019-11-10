@@ -4,6 +4,9 @@ const utils = require('../utils/util');
 const commentService = require('../services/commentService');
 const movieService = require('../services/movieService');
 
+/**
+ * Add Comments
+ */
 exports.addComment = async (req, res) => {   
     //Setup Validation
     const schema = joi.object().keys({
@@ -26,14 +29,7 @@ exports.addComment = async (req, res) => {
 
     let movieId = parseInt(req.body.movie_id);
 
-    let found = results.find(element => {
-        let id = utils.extractMovieId(element.url)
-        if(id == movieId) {
-            return true;
-        }
-
-        return false;
-    })
+    let found = utils.checkMovieExist(results, movieId);
     
     //Movie not found
     if(!found) {
@@ -56,4 +52,23 @@ exports.addComment = async (req, res) => {
         status: 'Success',
         message: 'Comment saved successfully!'
     })
-}
+};
+
+/**
+ * Get Comments by Movie Id
+ */
+exports.getCommentsByMovieId = async (req, res) => {
+    const movieId = req.params.movieId;
+    let message = 'comments retrieved successfully';
+    let {count, rows} = await commentService.getCommentsAndCount(req, res, movieId);
+
+    if(count <= 0) {
+        message = `No comment found for movie with id ${movieId}`;
+    }
+
+    return res.json({
+        status: 'Success',
+        message: message,
+        comments: rows
+    });
+};
