@@ -92,3 +92,19 @@ exports.fiterByGender = (characters, gender) => {
         return Promise.reject(e);
     }
 };
+
+/**
+ * Convert centimeter to feet and inches
+ */
+exports.convertCentToFeetIn = async (characters) => {
+    const totalHeight = await characters.reduce((total, current) => {
+        total += isNaN(current.height) ? 0 : parseInt(current.height);
+        return total;
+    }, 0);
+
+    const feet = Math.floor(totalHeight * 0.0328084);
+    const inches = ((totalHeight * 0.393700787) % 12).toFixed(2);
+
+    return `${totalHeight}cm (${feet}ft and ${inches} inches)`;
+
+}

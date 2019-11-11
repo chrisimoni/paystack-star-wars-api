@@ -41,10 +41,17 @@ exports.getMovieCharacters = async (req, res) => {
             characters = await utils.sortCharacters(characters, sortBy, gender, order);
         }
 
+        const heightToFeetIn = await utils.convertCentToFeetIn(characters);
+        
         res.status(200).json({
             status: 'Success',
-            message: 'All movies retrieved',
-            characters
+            message: 'All characters retrieved',
+            characters,
+            metadata: {
+                total_characters: characters.length,
+                total_height: heightToFeetIn
+                
+            }
         });
 
     } catch(err) {
