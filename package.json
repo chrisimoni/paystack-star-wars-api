@@ -16,6 +16,9 @@
   "bugs": {
     "url": "https://github.com/chrisimoni/paystack-star-wars-api/issues"
   },
+  "engines": {
+    "node": "10.15.2"
+  },
   "homepage": "https://github.com/chrisimoni/paystack-star-wars-api#readme",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
