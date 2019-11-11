@@ -13,6 +13,8 @@ These instructions will get you a copy of the project up and running on your loc
 ```shell
 npm install
 ```
+* Rename .env-example to .env
+* Enter your local database (PostgreSQL) credentials, or provide ElephantSQL connection string
 * To start the application locally, run:
 ```shell
 npm run dev
@@ -20,8 +22,8 @@ npm run dev
 * To access the project online, go to [https://mypaystack.herokuapp.com/](https://mypaystack.herokuapp.com/)
 
 ### Documentation
-* Navigate to http://localhost:${APP_PORT}/ on your local maching
-* Online doc can be found [https://mypaystack.herokuapp.com/](here)
+* Navigate to http://localhost:3000/ on your local maching. You can change the port to what who want in app.js
+* Online doc can be found here [https://mypaystack.herokuapp.com/](https://mypaystack.herokuapp.com/)
 
 
 ### Technology Stack
