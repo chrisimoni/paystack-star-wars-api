@@ -28,7 +28,7 @@ exports.getCommentsAndCount = async (req, res, movie_id) => {
 /**
  * Add comment
  */
-exports.addComment = async (req, res, movieId) => {
+exports.addComment = async (req, res, data) => {
     try {
         await Comment.create(data);
 
