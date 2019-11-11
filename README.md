@@ -17,7 +17,7 @@ npm install
 ```shell
 npm run dev
 ```
-* To access the project online, go to [https://mypaystack.herokuapp.com/movies](https://mypaystack.herokuapp.com/movies)
+* To access the project online, go to [https://mypaystack.herokuapp.com/](https://mypaystack.herokuapp.com/)
 
 ### Documentation
 * Navigate to http://localhost:${APP_PORT}/ on your local maching

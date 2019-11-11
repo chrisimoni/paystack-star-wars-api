@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./doc/swagger.json');
 
 const movieRoutes = require('./routes/movie');
 const commentRoutes = require('./routes/comment');
@@ -7,7 +9,6 @@ const characterRoutes = require('./routes/character');
 
 const app = express();
 
-// parse application/json
 app.use(bodyParser.json());
 
 /**
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 app.use('/movies/comments', commentRoutes);
 app.use('/movies/characters', characterRoutes);
 app.use('/movies', movieRoutes);
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 //Port
