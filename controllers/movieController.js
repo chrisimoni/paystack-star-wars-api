@@ -24,7 +24,7 @@ exports.getMovieLists = async (req, res) => {
         res.status(200).json({
             status: 'Success',
             message: 'All movies retrieved',
-            movies: movies
+            data: movies
         });
     } catch(err) {
         res.status(500).json({

@@ -51,8 +51,11 @@ exports.getMovieCharacters = async (req, res) => {
         res.status(200).json({
             status: 'Success',
             message: 'All characters retrieved',
-            characters,
-            metadata: {
+            data: {
+                movie_id: parseInt(movie_id),
+                characters
+            },
+            meta: {
                 total_characters: characters.length,
                 total_height: heightInFeetAndInches
                 

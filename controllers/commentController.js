@@ -72,6 +72,9 @@ exports.getCommentsByMovieId = async (req, res) => {
     return res.json({
         status: 'Success',
         message: message,
-        comments: rows
+        data: {
+            movie_id: parseInt(movie_id),
+            comments: rows
+        }
     });
 };
