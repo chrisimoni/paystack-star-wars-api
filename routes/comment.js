@@ -6,6 +6,6 @@ const router = express.Router();
 
 //Get movie list with opening crawls and comment counts
 router.post('/', commentController.addComment);
-router.get('/:movieId', commentController.getCommentsByMovieId);
+router.get('/:movie_id', commentController.getCommentsByMovieId);
 
 module.exports = router;

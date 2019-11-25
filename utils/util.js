@@ -2,13 +2,9 @@
  * Sort movies by release date
  */
 exports.sortMoviesByReleaseDate =  (movies) => {   
-    try{
-        return movies.sort((a, b) => {
-            return  new Date(b.release_date) - new Date(a.release_date);
-        });
-    }catch(err) {
-        return Promise.reject(err);
-    }  
+    return movies.sort((a, b) => {
+        return  new Date(b.release_date) - new Date(a.release_date);
+    });
 };
 
 /**
@@ -19,10 +15,10 @@ exports.extractMovieId = (url) => parseInt(url.replace(/[\D]/g, ''));
 /**
  * Check if a movie with a given Id is found
  */
-exports.checkMovieExist = (movies, movieId) => {
-    let result = movies.find(element => {
-        let id = this.extractMovieId(element.url)
-        if(id == movieId) {
+exports.checkMovieExist = (movies, movie_id) => {
+    const result = movies.find(element => {
+        const id = this.extractMovieId(element.url)
+        if(id == movie_id) {
             return true;
         }
 
@@ -36,18 +32,13 @@ exports.checkMovieExist = (movies, movieId) => {
  * Sort movie characters by given parameters
  */
 exports.sortCharacters = async (characters, sortBy, gender, order) => {
-    try {
-        //Check if sortBy is height 
-        const movieData = (sortBy === 'height') ? this.sortByheight(characters, sortBy) : characters;
-        let sortedData = this.sortAsc(movieData, sortBy);
-        sortedData = order && order === 'desc' ? [...sortedData].reverse() : sortedData;
-        sortedData = gender ? this.fiterByGender(sortedData, gender) : sortedData;
+    //Check if sortBy is height 
+    const movieData = (sortBy === 'height') ? this.sortByheight(characters, sortBy) : characters;
+    const sortedData = this.sortAsc(movieData, sortBy);
+    const sortedDataOrder = order && order === 'desc' ? [...sortedData].reverse() : sortedData;
+    const filterData = gender ? this.fiterByGender(sortedDataOrder, gender) : sortedDataOrder;
 
-        return sortedData;
-
-    }catch(err) {
-       return Promise.reject(err);
-    }
+    return filterData;
 };
 
 /**
@@ -84,24 +75,15 @@ exports.sortAsc = (array, sortBy) => {
  * Filter Characters by gender
  */
 exports.fiterByGender = (characters, gender) => {
-    try {
-        return characters.filter((character) => {
-            return character.gender === gender.toLowerCase();
-        });
-    }catch (e) {
-        return Promise.reject(e);
-    }
+    return characters.filter((character) => {
+        return character.gender === gender.toLowerCase();
+    });
 };
 
 /**
  * Convert centimeter to feet and inches
  */
-exports.convertCentToFeetIn = async (characters) => {
-    const totalHeight = await characters.reduce((total, current) => {
-        total += isNaN(current.height) ? 0 : parseInt(current.height);
-        return total;
-    }, 0);
-
+exports.convertCentimeterToFeetAndInches = (totalHeight) => {
     const feet = Math.floor(totalHeight * 0.0328084);
     const inches = ((totalHeight * 0.393700787) % 12).toFixed(2);
 

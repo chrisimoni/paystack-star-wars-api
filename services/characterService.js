@@ -1,39 +1,28 @@
 const axios = require('axios');
 
-const movieService = require('../services/movieService')
+const movieService = require('../services/movieService');
+const utils = require('../utils/util');
 
 /**
  * Get all Movie characters
  */
-exports.getMovieCharacters = async (req, res, movieId) => {
-    try {
-        const movie = await movieService.getMovieById(req, res, movieId);
+exports.getMovieCharacters = async (movie_id, sortBy, gender, order) => {
+    const movie = await movieService.getMovieById(movie_id);
 
-        let movieCharacters = await Promise.all(movie.characters.map( async url => {
-            return this.getCharacterData(req, res, url);
-        }));
+    // Get movie characters
+    const movieCharacters = await Promise.all(movie.characters.map( async url => {
+        return this.getCharacterData(url);
+    }));
 
-        return movieCharacters;
+    const sortedCharacters = await utils.sortCharacters(movieCharacters, sortBy, gender, order);
 
-    }catch(err) {
-        res.status(500).json({
-            status: 'Error',
-            message: err.message
-        });
-    }
+    return sortedCharacters;
 };
 
 /**
  * Get character details from URL
  */
-exports.getCharacterData = async (req, res, url) => {
-    try {
-        const characterData = await axios.get(url);
-        return characterData.data;
-    }catch(err) {
-        res.status(500).json({
-            status: 'Error',
-            message: err.message
-        });
-    }
+exports.getCharacterData = async (url) => {
+    const characterData = await axios.get(url);
+    return characterData.data;
 };
